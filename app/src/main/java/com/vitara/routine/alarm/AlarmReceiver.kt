@@ -17,6 +17,10 @@ class AlarmReceiver : BroadcastReceiver() {
             Log.w(TAG, "Alarm fired but the routine could not be read from the intent")
             return
         }
+        if (!request.test && !AlarmScheduler.isMasterAlarmEnabled(context)) {
+            Log.i(TAG, "Master alarm is OFF, ignoring received alarm for \"${request.block.title}\"")
+            return
+        }
         Log.i(TAG, "Firing ${request.event.name} of \"${request.block.title}\" (test=${request.test})")
         if (!request.test && !request.snooze) {
             if (!request.block.enabled || request.block.days.isEmpty()) return

@@ -71,7 +71,7 @@ class BlockEditActivity : AppCompatActivity() {
     private var blockId: Int = 0
     private var startMinute: Int = 6 * 60
     private var endMinute: Int = 7 * 60
-    private var days: MutableSet<Int> = RoutineBlock.EVERY_DAY.toMutableSet()
+    private var days: MutableSet<Int> = mutableSetOf()
     private var colorIndex: Int = PaletteColor.FROSTED_BLUE.ordinal
 
     /** Kept only so a routine edited here keeps the icon key it was stored with. */
@@ -164,9 +164,6 @@ class BlockEditActivity : AppCompatActivity() {
         startButton.setOnClickListener { pickTime(startMinute) { startMinute = it; renderWindow() } }
         endButton.setOnClickListener { pickTime(endMinute) { endMinute = it; renderWindow() } }
         findViewById<MaterialButton>(R.id.changeSoundButton).setOnClickListener { chooseSound() }
-        findViewById<MaterialButton>(R.id.everyDayButton).setOnClickListener { setDays(RoutineBlock.EVERY_DAY) }
-        findViewById<MaterialButton>(R.id.weekdaysButton).setOnClickListener { setDays(RoutineBlock.WEEKDAYS) }
-        findViewById<MaterialButton>(R.id.weekendsButton).setOnClickListener { setDays(RoutineBlock.WEEKENDS) }
         findViewById<MaterialButton>(R.id.saveButton).setOnClickListener { save() }
         findViewById<MaterialButton>(R.id.deleteButton).setOnClickListener { confirmDelete() }
     }
@@ -360,31 +357,6 @@ class BlockEditActivity : AppCompatActivity() {
         if (stored.enabled) AlarmScheduler.schedule(this, stored)
         AlarmNotifications.ensureChannels(this)
         toast(getString(R.string.saved))
-
-        // The most common reason a brand new routine seems to do nothing: the time was
-        // read as AM when PM was meant, so the first ring lands tomorrow. Say so.
-        val firstRing = Schedule.nextOccurrence(stored, BlockEvent.START)
-        if (stored.enabled && firstRing != null && !firstRing.toLocalDate().isEqual(LocalDate.now())) {
-            AlertDialog.Builder(this)
-                .setTitle(getString(R.string.first_ring_title, TimeText.relativeDay(firstRing)))
-                .setMessage(
-                    getString(
-                        R.string.first_ring_message,
-                        TimeText.clock(stored.startMinute),
-                        TimeText.relativeDay(firstRing),
-                        TimeText.clock(stored.startMinute)
-                    )
-                )
-                .setPositiveButton(R.string.ring_it_now) { _, _ ->
-                    AlarmScheduler.scheduleTest(this, stored, 3)
-                    toast(getString(R.string.ringing_soon))
-                    finish()
-                }
-                .setNegativeButton(android.R.string.ok) { _, _ -> finish() }
-                .setOnCancelListener { finish() }
-                .show()
-            return
-        }
         finish()
     }
 

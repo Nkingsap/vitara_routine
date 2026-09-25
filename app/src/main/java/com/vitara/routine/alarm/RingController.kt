@@ -32,6 +32,10 @@ object RingController {
 
     fun startRinging(context: Context, request: RingRequest) {
         val app = context.applicationContext
+        if (!request.test && !AlarmScheduler.isMasterAlarmEnabled(app)) {
+            Log.i(TAG, "Master alarm is OFF, ignoring ring request for ${request.block.title}")
+            return
+        }
         activeRequest = request
         AlarmNotifications.ensureChannels(app)
         AlarmNotifications.post(app, request.block, request.event, request.test)
@@ -45,6 +49,14 @@ object RingController {
         if (activeRequest?.block?.id == blockId) activeRequest = null
         AlarmNotifications.cancelBlock(app, blockId)
         RingService.requestDismiss(app, blockId)
+    }
+
+    /** Dismisses any currently ringing alarm when alarms are turned off globally. */
+    fun dismissAll(context: Context) {
+        val app = context.applicationContext
+        activeRequest?.let { req ->
+            dismiss(app, req.block.id)
+        }
     }
 
     /** Snoozes the current alarm: it rings again in a few minutes, nothing else changes. */

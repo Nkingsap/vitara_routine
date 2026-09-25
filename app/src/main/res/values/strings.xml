@@ -45,6 +45,7 @@
     <string name="version_line">Vitara Routine %1$s \u2014 built for Android 8.0 to 14.\nEverything runs offline, on this device only.</string>
 
     <!-- Master Alarm Switch -->
+    <string name="section_master_alarm">Alarms master switch</string>
     <string name="master_alarm_title">All Alarms</string>
     <string name="master_alarm_on_desc">Alarms are active — routines will ring</string>
     <string name="master_alarm_off_desc">Alarms are paused — no alarms will ring</string>
@@ -53,7 +54,7 @@
     <string name="master_alarm_turned_on">Alarms turned ON</string>
     <string name="master_alarm_turned_off">Alarms turned OFF (silenced)</string>
     <string name="alarms_paused_title">Alarms are turned off</string>
-    <string name="alarms_paused_detail">Turn on alarms above to resume routines</string>
+    <string name="alarms_paused_detail">Turn on alarms in Settings to resume routines</string>
     <string name="select_days_prompt">Select days (tap to choose):</string>
 
     <!-- Permissions -->

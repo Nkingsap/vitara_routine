@@ -90,14 +90,16 @@ object Schedule {
     }
 
     /** The next ring of any routine, or null when everything is switched off. */
-    fun nextEvent(context: android.content.Context, from: ZonedDateTime = ZonedDateTime.now()): ScheduledEvent? =
-        RoutineRepository.all(context)
+    fun nextEvent(context: android.content.Context, from: ZonedDateTime = ZonedDateTime.now()): ScheduledEvent? {
+        if (!RoutineRepository.isMasterAlarmEnabled(context)) return null
+        return RoutineRepository.all(context)
             .flatMap { block ->
                 BlockEvent.entries.mapNotNull { event ->
                     nextOccurrence(block, event, from)?.let { ScheduledEvent(block, event, it) }
                 }
             }
             .minByOrNull { it.time.toInstant() }
+    }
 
     private fun at(date: LocalDate, event: BlockEvent, block: RoutineBlock): ZonedDateTime {
         val minute = if (event.isStart) block.startMinute else block.endMinute

@@ -13,6 +13,7 @@ object RoutineRepository {
     private const val KEY_BLOCKS = "blocks"
     private const val KEY_NEXT_ID = "next_id"
     private const val KEY_SEEDED = "seeded"
+    private const val KEY_MASTER_ALARM = "master_alarm_enabled"
 
     /**
      * Days the shipped timetable runs on: the whole week.
@@ -172,6 +173,14 @@ object RoutineRepository {
         if (index < 0) return
         list[index] = list[index].copy(enabled = enabled)
         write(context, list)
+    }
+
+    fun isMasterAlarmEnabled(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_MASTER_ALARM, true)
+
+    @Synchronized
+    fun setMasterAlarmEnabled(context: Context, enabled: Boolean) {
+        prefs(context).edit().putBoolean(KEY_MASTER_ALARM, enabled).apply()
     }
 
     private fun nextId(context: Context): Int {

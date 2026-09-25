@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity(), BlockAdapter.Listener {
         findViewById<RecyclerView>(R.id.blockList).apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = blockAdapter
+            isNestedScrollingEnabled = false
         }
 
         findViewById<MaterialButton>(R.id.newRoutineButton).setOnClickListener {
@@ -84,7 +87,7 @@ class MainActivity : AppCompatActivity(), BlockAdapter.Listener {
 
     override fun onResume() {
         super.onResume()
-        // Re-arming on every visit also repairs alarms the system dropped.
+        // Re-arming on every visit also repairs alarms the system dropped (if master alarm enabled).
         AlarmScheduler.scheduleAll(this)
         clockText.text = TimeText.nowClock()
         handler.post(clockTicker)
@@ -115,6 +118,11 @@ class MainActivity : AppCompatActivity(), BlockAdapter.Listener {
     }
 
     private fun renderNextUp() {
+        if (!AlarmScheduler.isMasterAlarmEnabled(this)) {
+            nextUpTitle.text = getString(R.string.alarms_paused_title)
+            nextUpDetail.text = getString(R.string.alarms_paused_detail)
+            return
+        }
         val next = Schedule.nextEvent(this)
         if (next == null) {
             nextUpTitle.text = getString(R.string.nothing_scheduled)
@@ -138,7 +146,7 @@ class MainActivity : AppCompatActivity(), BlockAdapter.Listener {
             .setTitle(R.string.add_timetable_title)
             .setMessage(R.string.add_timetable_message)
             .setPositiveButton(R.string.every_day) { _, _ -> installTimetable(RoutineBlock.EVERY_DAY) }
-            .setNeutralButton(R.string.mon_tue) { _, _ -> installTimetable(setOf(1, 2)) }
+            .setNeutralButton(R.string.mon_to_fri) { _, _ -> installTimetable(RoutineBlock.WEEKDAYS) }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
@@ -175,19 +183,13 @@ class MainActivity : AppCompatActivity(), BlockAdapter.Listener {
     }
 
     override fun onBlockMenu(block: RoutineBlock, anchor: View) {
-        val labels = arrayOf("Edit", "Duplicate", "Delete")
+        val labels = arrayOf("Edit", "Delete")
         androidx.appcompat.widget.PopupMenu(this, anchor).apply {
             labels.forEachIndexed { index, label -> menu.add(0, index, index, label) }
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     0 -> startActivity(BlockEditActivity.intent(this@MainActivity, block.id))
-                    1 -> {
-                        RoutineRepository.duplicate(this@MainActivity, block.id)
-                        render()
-                        showToast("Duplicated (switched off)")
-                    }
-
-                    2 -> confirmDelete(block)
+                    1 -> confirmDelete(block)
                     else -> return@setOnMenuItemClickListener false
                 }
                 true

@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.vitara.routine.BuildConfig
 import com.vitara.routine.R
 import com.vitara.routine.alarm.AlarmScheduler
@@ -27,6 +28,9 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var permissionContainer: LinearLayout
     private lateinit var permissionsHeader: TextView
     private lateinit var loadTimetableButton: MaterialButton
+    private lateinit var masterAlarmCard: View
+    private lateinit var masterAlarmDetail: TextView
+    private lateinit var masterAlarmSwitch: MaterialSwitch
 
     private val notificationPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { render() }
@@ -38,6 +42,24 @@ class SettingsActivity : AppCompatActivity() {
         permissionContainer = findViewById(R.id.permissionContainer)
         permissionsHeader = findViewById(R.id.permissionsHeader)
         loadTimetableButton = findViewById(R.id.loadTimetableButton)
+        masterAlarmCard = findViewById(R.id.masterAlarmCard)
+        masterAlarmDetail = findViewById(R.id.masterAlarmDetail)
+        masterAlarmSwitch = findViewById(R.id.masterAlarmSwitch)
+
+        masterAlarmCard.setOnClickListener {
+            masterAlarmSwitch.toggle()
+        }
+        masterAlarmSwitch.setOnCheckedChangeListener { _, isChecked ->
+            AlarmScheduler.setMasterAlarmEnabled(this, isChecked)
+            masterAlarmDetail.text =
+                if (isChecked) getString(R.string.master_alarm_on_desc)
+                else getString(R.string.master_alarm_off_desc)
+            Toast.makeText(
+                this,
+                if (isChecked) R.string.master_alarm_turned_on else R.string.master_alarm_turned_off,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         findViewById<ImageButton>(R.id.backButton).setOnClickListener { finish() }
         loadTimetableButton.setOnClickListener { confirmTimetable() }
@@ -51,6 +73,14 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun render() {
+        val masterEnabled = AlarmScheduler.isMasterAlarmEnabled(this)
+        if (masterAlarmSwitch.isChecked != masterEnabled) {
+            masterAlarmSwitch.isChecked = masterEnabled
+        }
+        masterAlarmDetail.text =
+            if (masterEnabled) getString(R.string.master_alarm_on_desc)
+            else getString(R.string.master_alarm_off_desc)
+
         val missing = AlarmSetup.missing(this) { askNotifications() }
 
         // When nothing is missing the whole section disappears, instead of showing a
@@ -84,7 +114,7 @@ class SettingsActivity : AppCompatActivity() {
             .setTitle(R.string.add_timetable_title)
             .setMessage(R.string.add_timetable_message)
             .setPositiveButton(R.string.every_day) { _, _ -> installTimetable(RoutineBlock.EVERY_DAY) }
-            .setNeutralButton(R.string.mon_tue) { _, _ -> installTimetable(setOf(1, 2)) }
+            .setNeutralButton(R.string.mon_to_fri) { _, _ -> installTimetable(RoutineBlock.WEEKDAYS) }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
     }

@@ -42,14 +42,32 @@ object AlarmScheduler {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.S || am.canScheduleExactAlarms()
     }
 
+    fun isMasterAlarmEnabled(context: Context): Boolean =
+        RoutineRepository.isMasterAlarmEnabled(context)
+
+    fun setMasterAlarmEnabled(context: Context, enabled: Boolean) {
+        RoutineRepository.setMasterAlarmEnabled(context, enabled)
+        if (enabled) {
+            scheduleAll(context)
+        } else {
+            cancelAll(context)
+            RingController.dismissAll(context)
+        }
+    }
+
     /** Re-arms every routine. Called on app start, on boot and when permissions change. */
     fun scheduleAll(context: Context) {
         AlarmNotifications.ensureChannels(context)
+        if (!isMasterAlarmEnabled(context)) {
+            cancelAll(context)
+            return
+        }
         RoutineRepository.all(context).forEach { schedule(context, it) }
     }
 
     fun schedule(context: Context, block: RoutineBlock) {
         cancel(context, block.id)
+        if (!isMasterAlarmEnabled(context)) return
         if (!block.enabled || block.days.isEmpty()) return
         for (event in BlockEvent.entries) {
             val at = Schedule.nextOccurrence(block, event) ?: continue
@@ -61,7 +79,12 @@ object AlarmScheduler {
         val am = context.getSystemService(AlarmManager::class.java) ?: return
         for (event in BlockEvent.entries) {
             am.cancel(operation(context, blockId, null, event, test = false))
+            am.cancel(operation(context, blockId, null, event, test = false, snooze = true))
         }
+    }
+
+    fun cancelAll(context: Context) {
+        RoutineRepository.all(context).forEach { cancel(context, it.id) }
     }
 
     /** Rings in [delaySeconds] seconds so sound + vibration + full screen can be verified. */
