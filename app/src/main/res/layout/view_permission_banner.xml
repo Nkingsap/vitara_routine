@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_glass_card"
+    android:orientation="vertical"
+    android:padding="18dp">
+
+    <TextView
+        android:id="@+id/bannerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/ink_deep"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="Allow notifications" />
+
+    <TextView
+        android:id="@+id/bannerMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/ink_soft"
+        android:textSize="13sp"
+        tools:text="Alarms are delivered as notifications." />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bannerAction"
+        style="@style/PillButton.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/action_grant" />
+</LinearLayout>

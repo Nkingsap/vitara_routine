@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vitara Routine</string>
+    <string name="app_name_caps">Vitara Routine</string>
+    <string name="app_tagline">Your day, on rails.</string>
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="action_grant">Grant</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <!-- Home -->
+    <string name="next_up_label">Next</string>
+    <string name="nothing_scheduled">Nothing scheduled</string>
+    <string name="empty_routines">No routines yet.</string>
+    <string name="browse_templates">Browse templates</string>
+    <string name="new_routine">New routine</string>
+    <string name="alarm_setup_needed">Finish alarm setup</string>
+    <string name="tap_to_fix">Tap to review and fix</string>
+    <string name="section_routines">Routines</string>
+    <string name="cd_more">More options</string>
+    <string name="status_done">Done</string>
+    <string name="status_now">Now</string>
+    <string name="status_off">Off</string>
+
+    <!-- Settings -->
+    <string name="section_permissions">Alarm permissions</string>
+    <string name="section_sound">Alarm sound</string>
+    <string name="section_timetable">Templates</string>
+    <string name="section_about">About</string>
+    <string name="alarm_sound_title">Volume is yours to set</string>
+    <string name="alarm_sound_hint">Alarms play on the phone\u2019s alarm stream. Use the volume buttons while an alarm rings to set how loud it is.</string>
+    <string name="timetable_title">10 Hours Study</string>
+    <string name="timetable_detail">12 routines, 4:00 AM to 11:00 PM \u2014 every one editable afterwards.</string>
+    <string name="add_timetable">Use this template</string>
+    <string name="timetable_added_none">Those routines are already in the list</string>
+    <plurals name="timetable_added">
+        <item quantity="one">Added or updated %1$d routine</item>
+        <item quantity="other">Added or updated %1$d routines</item>
+    </plurals>
+    <string name="add_timetable_title">Add the study timetable?</string>
+    <string name="add_timetable_message">Adds 12 routines: wake up at 4:00 AM, five study blocks (10 hours), cooking, clean up, rest and food breaks. Routines you already have are kept. Choose the days it should ring on.</string>
+    <string name="mon_tue">Mon &amp; Tue</string>
+    <string name="version_line">Vitara Routine %1$s \u2014 built for Android 8.0 to 14.\nEverything runs offline, on this device only.</string>
+
+    <!-- Permissions -->
+    <string name="perm_notifications_title">Allow notifications</string>
+    <string name="perm_notifications_msg">Alarms are delivered as notifications. Without this, an alarm cannot make a sound while the app is closed.</string>
+    <string name="perm_overlay_title">Allow alarms over other apps</string>
+    <string name="perm_overlay_msg">Android blocks apps from jumping to the front. Grant &#8220;display over other apps&#8221; so the alarm screen appears even while you are using another app.</string>
+    <string name="perm_exact_title">Allow exact alarms</string>
+    <string name="perm_exact_msg">Lets an alarm ring at the exact minute you scheduled, even in battery saver.</string>
+    <string name="perm_fsi_title">Allow full screen alarms</string>
+    <string name="perm_fsi_msg">Lets an alarm take over the whole screen on top of the lock screen so you cannot miss it.</string>
+
+    <!-- Editor -->
+    <string name="editor_new_title">New routine</string>
+    <string name="editor_edit_title">Edit routine</string>
+    <string name="label_routine">Routine</string>
+    <string name="hint_title">Wake up, Study, Rest\u2026</string>
+    <string name="hint_message">Shown on the full screen alarm</string>
+    <string name="label_presets">Start from</string>
+    <string name="label_window">Time window</string>
+    <string name="label_days">Repeat on</string>
+    <string name="label_alarm">Alarm</string>
+    <string name="label_sound">Alarm sound</string>
+    <string name="default_alarm_sound">Default alarm sound</string>
+    <string name="pick_sound">Pick a sound\u2026</string>
+    <string name="change_sound">Change</string>
+    <string name="volume_hint">Plays on the phone\u2019s alarm volume \u2014 adjust it with the volume buttons.</string>
+    <string name="switch_vibrate">Vibrate with the alarm</string>
+    <string name="switch_ring_end">Also ring when the block ends</string>
+    <string name="switch_fullscreen">Full screen takeover while ringing</string>
+    <string name="switch_enabled">Routine active</string>
+    <string name="save">Save routine</string>
+    <string name="delete">Delete</string>
+    <string name="every_day">Every day</string>
+    <string name="weekdays">Weekdays</string>
+    <string name="weekends">Weekends</string>
+    <string name="overnight_hint">Ends the next day</string>
+    <string name="title_required">Give this routine a name</string>
+    <string name="same_time_error">Start and end time cannot be the same</string>
+    <string name="no_days_error">Pick at least one day</string>
+    <string name="saved">Routine saved</string>
+    <string name="deleted">Routine deleted</string>
+    <string name="first_ring_title">First alarm is %1$s</string>
+    <string name="first_ring_message">%1$s has already passed today, so this routine first rings %2$s at %3$s.\n\nIf you meant a different AM/PM, go back and change the time.</string>
+    <string name="ring_it_now">Preview it now</string>
+    <string name="ringing_soon">Preview starting in 3 seconds\u2026</string>
+
+    <!-- Ringing screen -->
+    <string name="dismiss">DISMISS</string>
+    <string name="snooze">SNOOZE</string>
+    <string name="ring_hint">Sound and vibration continue until you press Dismiss.</string>
+    <string name="ring_started">Time to start</string>
+    <string name="ring_ended">Block finished</string>
+    <string name="ring_preview">Alarm preview</string>
+    <string name="ring_other_active">Another routine is ringing \u2014 dismiss it first</string>
+
+    <!-- Notification / channel -->
+    <string name="channel_alarms_name">Routine alarms</string>
+    <string name="channel_alarms_desc">Rings with sound and vibration when a routine starts or ends</string>
+    <string name="notif_dismiss">Dismiss</string>
+    <string name="notif_snooze">Snooze %1$d min</string>
+</resources>

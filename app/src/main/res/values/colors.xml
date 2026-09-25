@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================================
+         Vitara Routine palette (exact brand colours, no substitutes)
+         Frosted Blue #7bdff2 | Icy Aqua #b2f7ef | Mint Cream #eff7f6
+         Petal Frost  #f7d6e0 | Blush Pop #f2b5d4
+         ============================================================ -->
+    <color name="frosted_blue">#7bdff2</color>
+    <color name="icy_aqua">#b2f7ef</color>
+    <color name="mint_cream">#eff7f6</color>
+    <color name="petal_frost">#f7d6e0</color>
+    <color name="blush_pop">#f2b5d4</color>
+
+    <!-- Readable ink colours built to sit on top of the pastel palette -->
+    <color name="ink_deep">#1B3A42</color>
+    <color name="ink_soft">#59757C</color>
+    <color name="ink_on_accent">#123039</color>
+    <color name="outline_soft">#8FB6BE</color>
+
+    <!-- Liquid glass tokens -->
+    <color name="glass_fill">#6BFFFFFF</color>
+    <color name="glass_fill_strong">#A8FFFFFF</color>
+    <color name="glass_fill_soft">#47FFFFFF</color>
+    <color name="glass_stroke">#96FFFFFF</color>
+    <color name="glass_divider">#1F1B3A42</color>
+
+    <!-- Dark slate used for primary actions -->
+    <color name="slate">#46585F</color>
+    <color name="slate_deep">#34474E</color>
+    <color name="on_slate">#F3FBFC</color>
+
+    <!-- Background gradient -->
+    <color name="bg_top">#E3F3F7</color>
+    <color name="bg_bottom">#C3E5EC</color>
+
+    <!-- Surfaces -->
+    <color name="surface_card">#FFFFFF</color>
+    <color name="surface_dark_scrim">#CC1B3A42</color>
+    <color name="white_70">#B3FFFFFF</color>
+
+    <!-- Status accents -->
+    <color name="status_now">#46585F</color>
+    <color name="status_next">#59757C</color>
+    <color name="status_done">#8FA9AF</color>
+</resources>

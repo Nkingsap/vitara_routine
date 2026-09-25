@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="16dp">
+
+        <LinearLayout
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/blockTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textColor="@color/ink_deep"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="4:10 AM – 6:30 AM" />
+
+            <TextView
+                android:id="@+id/blockStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:letterSpacing="0.08"
+                android:textAllCaps="true"
+                android:textColor="@color/status_done"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:text="DONE" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/blockTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:textColor="@color/ink_deep"
+            android:textSize="16sp"
+            tools:text="Rest / House work" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/blockEnabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumbTint="@color/switch_thumb"
+            android:trackTint="@color/switch_track" />
+
+        <ImageButton
+            android:id="@+id/blockMore"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cd_more"
+            android:padding="9dp"
+            android:src="@drawable/ic_more_vert" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/glass_divider" />
+
+</LinearLayout>

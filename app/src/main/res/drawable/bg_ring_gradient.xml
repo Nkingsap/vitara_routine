@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ringing screen background: glass gradient with soft bokeh -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:centerColor="@color/mint_cream"
+                android:endColor="@color/icy_aqua"
+                android:startColor="@color/petal_frost" />
+        </shape>
+    </item>
+    <item
+        android:width="300dp"
+        android:height="300dp"
+        android:gravity="top|left"
+        android:left="-80dp"
+        android:top="60dp">
+        <shape android:shape="oval">
+            <solid android:color="#80FFFFFF" />
+        </shape>
+    </item>
+    <item
+        android:width="380dp"
+        android:height="380dp"
+        android:gravity="bottom|right"
+        android:bottom="-70dp"
+        android:right="-80dp">
+        <shape android:shape="oval">
+            <solid android:color="#4DFFFFFF" />
+        </shape>
+    </item>
+</layer-list>

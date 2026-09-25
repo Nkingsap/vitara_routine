@@ -1,0 +1,30 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# App build output
+app/build/
+**/build/
+
+# Gradle
+.gradle/
+gradle-wrapper.jar
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (contains API keys)
+google-services.json
+
+# OS generated files
+Thumbs.db
+*.swp
+*~

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- App background: soft mint/teal gradient with translucent bokeh circles -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:endColor="@color/bg_bottom"
+                android:startColor="@color/bg_top" />
+        </shape>
+    </item>
+    <item
+        android:width="280dp"
+        android:height="280dp"
+        android:gravity="top|right"
+        android:right="-70dp"
+        android:top="40dp">
+        <shape android:shape="oval">
+            <solid android:color="#7AFFFFFF" />
+        </shape>
+    </item>
+    <item
+        android:width="200dp"
+        android:height="200dp"
+        android:gravity="top|right"
+        android:right="30dp"
+        android:top="170dp">
+        <shape android:shape="oval">
+            <solid android:color="#5CFFFFFF" />
+        </shape>
+    </item>
+    <item
+        android:width="360dp"
+        android:height="360dp"
+        android:gravity="bottom|left"
+        android:left="-90dp"
+        android:bottom="-60dp">
+        <shape android:shape="oval">
+            <solid android:color="#3DFFFFFF" />
+        </shape>
+    </item>
+    <item
+        android:width="240dp"
+        android:height="240dp"
+        android:gravity="bottom|right"
+        android:bottom="120dp"
+        android:right="40dp">
+        <shape android:shape="oval">
+            <solid android:color="#2E7BDFF2" />
+        </shape>
+    </item>
+</layer-list>
