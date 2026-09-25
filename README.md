@@ -219,5 +219,3 @@ app/src/main/java/com/vitara/routine/
   snoozed alarm behaves exactly like a scheduled one (test alarms included).
 * **Wake up 04:00** etc. can be edited; the app seeds *Wake up 04:00–04:15*,
   *Study 04:15–05:00*, *Rest 05:00–06:00* for every day on first launch.
-#   v i t a r a _ r o u t i n e  
- 
